@@ -34,7 +34,7 @@ This is a simple full-stack web application built with PHP Laravel on the backen
 - Styling: Tailwind CSS
 
 ## Preview Project
-![alt text](https://github.com/Little-BlackCat/search-restaurants/blob/main/public/foods.jpg "foods")
+![alt text](https://github.com/Little-BlackCat/search-restaurants/blob/main/public/Find%20Restaurants.png "Find Restaurants")
 
 ## Getting Started
 Follow these steps to set up and run the Restaurant Search App on your local machine.
