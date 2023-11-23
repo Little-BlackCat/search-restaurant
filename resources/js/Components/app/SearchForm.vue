@@ -1,6 +1,6 @@
 <template>
   <Head title="Find Restaurant" />
-
+  
   <form @submit.prevent="searchRestaurant" class="w-[350px] sm:w-[600px] h-[80px] flex items-center mx-auto">
     <TextInput 
       type="text" 
@@ -20,7 +20,7 @@
   </form>
 
   <div 
-    class="w-[350px] sm:w-[600px] mx-auto mt-8"
+    class="w-[350px] sm:min-w-[768px] lg:w-[1240px] mx-auto mt-8"
     v-if="restaurantData.length > 0"
   >
     <h1 class="text-right mb-1">Restaurant Result : 
@@ -28,26 +28,28 @@
         {{ restaurantData.length }}
       </span>
     </h1>
-    <div 
-      class="border-2 border-rose-700 rounded-lg py-4 px-8 mb-8"
-      v-for="restaurant in restaurantData"
-    >
-      <li class="gap-y-10 list-none">
-        <h1 class="sm:inline-block text-xl font-bold">
-          <img src="/fire.svg" alt="Fire Icon" class="w-6 h-6 inline-block">
-          Restaurant name :
-        </h1>
-        <a :href="restaurant.source"
-          target="_blank"
-          class="font-semibold text-xl bg-orange-500 text-white ml-1 p-1 rounded-md hover:underline hover:duration-300">"{{ restaurant.title }}"</a>
-        <h2 class="text-xl mt-4 font-bold">
-          <img src="/pin.svg" alt="Map Pin" class="w-6 h-6 inline-block">
-          Address :
-          <span class="font-normal text-lg">
-            {{ restaurant.address }}
-          </span>
-        </h2>
-      </li>
+    <div class="lg:grid lg:gap-x-8 lg:grid-cols-3">
+      <div 
+        class="border-2 border-rose-700 rounded-lg py-4 px-8 mb-8"
+        v-for="restaurant in restaurantData"
+      >
+        <li class="gap-y-10 list-none">
+          <h1 class="sm:inline-block text-xl font-bold">
+            <img src="/fire.svg" alt="Fire Icon" class="w-6 h-6 inline-block">
+            Restaurant name :
+          </h1>
+          <a :href="restaurant.source"
+            target="_blank"
+            class="font-semibold text-xl bg-orange-500 text-white ml-1 p-1 rounded-md hover:underline hover:duration-300 block lg:block text-center my-2 sm:inline-block">"{{ restaurant.title }}"</a>
+          <h2 class="text-xl mt-4 font-bold">
+            <img src="/pin.svg" alt="Map Pin" class="w-6 h-6 inline-block">
+            Address :
+            <span class="font-normal text-lg">
+              {{ restaurant.address }}
+            </span>
+          </h2>
+        </li>
+      </div>
     </div>
   </div>
   <div v-else-if="isLoading == true" class="text-center text-xl font-bold">
