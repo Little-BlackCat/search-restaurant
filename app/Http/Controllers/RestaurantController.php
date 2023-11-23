@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Cache;
 
 class RestaurantController extends Controller
 {
+//  /**
+//  * This function retrieves a list of restaurants based on a specified keyword.
+//  * It first checks the cache for the results, and if not found, it fetches the data
+//  * from the Google Maps API. The retrieved results are cached for 24 hours.
+//  *
+//  * @param Request $request The incoming HTTP request object
+//  * @return Response The response containing the retrieved restaurant data
+//  */
     public function getRestaurants(Request $request)
     {
         $keyword = $request->input('keyword', 'Bang sue');

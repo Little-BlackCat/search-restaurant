@@ -23,7 +23,11 @@
     class="w-[350px] sm:w-[600px] mx-auto mt-8"
     v-if="restaurantData.length > 0"
   >
-    <h1 class="text-right mb-1">Restaurant Result : {{ restaurantData.length }}</h1>
+    <h1 class="text-right mb-1">Restaurant Result : 
+      <span class="text-xl font-semibold text-green-700">
+        {{ restaurantData.length }}
+      </span>
+    </h1>
     <div 
       class="border-2 border-rose-700 rounded-lg py-4 px-8 mb-8"
       v-for="restaurant in restaurantData"
@@ -46,6 +50,12 @@
       </li>
     </div>
   </div>
+  <div v-else-if="isLoading == true" class="text-center text-xl font-bold">
+    Searching...
+  </div>
+  <div v-if="searchInitiated && restaurantData.length == 0" class="text-center text-xl font-bold">
+    No restaurants found.
+  </div>
 
 </template>
 
@@ -61,15 +71,27 @@ const form = useForm({
   search: 'Bang sue',
 });
 
-let restaurantData = ref([]);
+const restaurantData = ref([]);
+const isLoading = ref(false);
+const searchInitiated = ref(false);
 
+// The `searchRestaurant` function is an asynchronous function that is triggered when the form is
+// submitted.
 async function searchRestaurant() {
   try {
+    isLoading.value = true;
+    searchInitiated.value = false;
+
     const response = await axios.post(`http://localhost/api/maps?keyword=${form.search}`);
     restaurantData.value = response.data[0].result;
     // console.log(restaurantData.value);
+
+    isLoading.value = false;
+    searchInitiated.value = true;
   } catch (error) {
     console.error('Error submitting form:', error);
+    isLoading = false;
+    searchInitiated = false;
   }
 }
 
